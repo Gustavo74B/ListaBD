@@ -1,0 +1,118 @@
+-- EXERCÍCIO 1
+create or replace view a as
+select aluno.nome as aluno, disciplina.nome as disciplina, curso.nome as curso
+from aluno
+inner join matricula
+	on aluno.id_aluno = matricula.id_aluno
+inner join disciplina
+	on matricula.id_disciplina = disciplina.id_disciplina
+inner join curso
+	on disciplina.id_curso = curso.id_curso;
+select * from a;
+
+-- EXERCÍCIO 2
+create or replace view b as
+select disciplina.nome, count(aluno.id_aluno)
+from aluno
+inner join matricula
+	on aluno.id_aluno = matricula.id_aluno
+inner join disciplina
+	on matricula.id_disciplina = disciplina.id_disciplina
+group by disciplina.nome;
+select * from b;
+    
+-- EXERCÍCIO 3
+create or replace view c as
+select aluno.nome as aluno, disciplina.nome as disciplina, matricula.status
+from aluno
+inner join matricula
+	on aluno.id_aluno = matricula.id_aluno
+inner join disciplina
+	on matricula.id_disciplina = disciplina.id_disciplina;
+select * from c;
+
+-- EXERCÍCIO 4
+create or replace view d as
+select professor.nome as professor, disciplina.nome as disciplina, turma.horario
+from professor
+inner join turma
+	on turma.id_professor = professor.id_professor
+inner join disciplina
+	on turma.id_disciplina = disciplina.id_disciplina;
+select * from d;
+    
+-- EXERCÍCIO 5
+create or replace view e as
+select aluno.nome, aluno.data_nascimento
+from aluno
+where data_nascimento < "2004-10-11";
+select * from e;
+
+-- EXERCÍCIO 6
+create or replace view f as
+select curso.nome as curso,count(disciplina.id_disciplina) as disciplinas, curso.carga_horaria
+from disciplina
+inner join curso
+	on curso.id_curso = disciplina.id_curso
+group by curso.id_curso;
+select * from f;
+
+-- EXERCÍCIO 7
+create or replace view g as
+select nome, especialidade
+from professor;
+select * from g;
+
+-- EXERCÍCIO 10
+create or replace view i as
+select id_turma, semestre
+from turma
+where semestre = "2024.1";
+select * from i;
+
+-- EXERCÍCIO 11
+create or replace view j as
+select aluno.nome, matricula.status
+from aluno
+inner join matricula
+	on aluno.id_aluno = matricula.id_aluno
+where matricula.status = "Trancado";
+select * from j;
+
+-- EXERCÍCIO 12
+create or replace view k as
+select disciplina.nome
+from disciplina
+inner join matricula
+	on disciplina.id_disciplina = matricula.id_disciplina
+where matricula.id_matricula = null;
+select * from k;
+
+-- EXERCÍCIO 13
+create or replace view l as
+select count(id_matricula), status
+from matricula
+group by status;
+select * from l;
+
+-- EXERCÍCIO 17
+create or replace view p as
+select nome, id_curso
+from disciplina
+where id_curso = 1;
+select * from p;
+
+-- EXERCÍCIO 19
+create or replace view r as
+select nome, cpf, email
+from aluno;
+select * from r;
+
+-- EXERCÍCIO 20
+create or replace view s as
+select professor.nome, count(turma.id_disciplina)
+from turma
+inner join professor
+	on professor.id_professor = turma.id_professor
+group by turma.id_professor;
+select * from s;
